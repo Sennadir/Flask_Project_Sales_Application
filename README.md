@@ -31,9 +31,9 @@ It will help us interact easily with our model and easily try it.
 
 ## Model Usage
 
-* In order to use the model, you will have to browse a Test Set which has exactly the same columns as the Training Set (Without the Lables of course :-)).
+* In order to use the model, you will have to browse a Test Set which has exactly the same columns as the Training Set (Without the Labels of course :-)).
 
-* Because we can't display the totality of the prediction for the different stores, we have choosen to only display 2 Stores (The ones with the majority of samples) and the predicted values for all stores could be find in a generated CSV File that could be find in the Prediction Folder.
+* Because we can't display the totality of the prediction for the different stores, we have chosen to only display 2 Stores (The ones with the majority of samples) and the predicted values for all stores could be found in a generated CSV File that could be found in the Prediction Folder.
 
 
 # File Structure
