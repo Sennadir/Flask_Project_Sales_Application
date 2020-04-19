@@ -1,10 +1,8 @@
-from flask import Flask,render_template,url_for,request,redirect
-import json, random
-
-
 import warnings
 warnings.filterwarnings("ignore")
 
+from flask import Flask,render_template,url_for,request,redirect
+import json, random
 from werkzeug.utils import secure_filename
 
 import pandas as pd
@@ -18,22 +16,15 @@ from sklearn.externals import joblib
 app = Flask(__name__)
 
 validation = pd.read_csv('./data/validation.csv')
-
 x = pd.read_csv('./data/train.csv',  parse_dates=['Date'])
 store_data =  pd.read_csv('./data/store.csv')
-
-
 sales_by_date = x.groupby('Date').agg({'Sales':['mean', 'std']})
 sales_by_date = sales_by_date['2015']
 data = sales_by_date['Sales'].reset_index()
 
 temp = pd.merge(x, store_data, on="Store")
 temp_1 = pd.DataFrame(temp['StoreType'].value_counts()).reset_index()
-
 temp_2 = pd.DataFrame(temp['Assortment'].value_counts()).reset_index()
-
-
-#rf = joblib.load('model.pkl')
 
 colors = [
     "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
@@ -53,14 +44,12 @@ def chart():
 
 
     chart_lab = ['Store Type ' + t for t in temp_1['index']]
-    #chart_lab = temp['index']
     chart_val = temp_1['StoreType']
 
 
     lab_2 = ['Assortiment ' + t for t in temp_2['index']]
     val_2 = temp_2['Assortment']
     legend_2 = 'Total'
-
 
     return render_template('index.html', \
         values=values, labels=labels, legend=legend,\
@@ -71,42 +60,23 @@ def chart():
 
 @app.route('/pie')
 def load_second_page():
-   return render_template('pie_chart.html', values = validation['Sales'], labels = validation['Date'],legend = 'Réelle', \
+   return render_template('pie_chart.html', values = validation['Sales'], \
+    labels = validation['Date'],legend = 'Réelle', \
     val_1 = validation['Pred'], lab_1 = validation['Date'], legend_1 = 'Predictions')
-
-
-@app.route('/file')
-def upload_test():
-   return render_template('file.html')
 
 
 rf = joblib.load("./Model/model_rf.pkl")
 
 @app.route('/pred', methods = ['GET', 'POST'])
 def predict():
-
-    #f = request.files['file']# .file.name #.filename
     f = request.files['file']
 
     if f.filename.split('.')[-1] == 'csv':
         f.save('./data/' + secure_filename(f.filename))
         _ = pd.read_csv('./data/' + secure_filename(f.filename))
 
-        '''
         a = data_preprocessed('./data/' + secure_filename(f.filename))
-
-        values = list(rf.predict(a.processing()))#[:500]
-
-        time.sleep(2)
-
-        labels = _['Date']
-        legend = 'Prediction'
-        '''
-
-        a = data_preprocessed('./data/' + secure_filename(f.filename))
-
         _['pred'] = list(rf.predict(a.processing()))
-
         _.to_csv('./Predictions/Predictions.csv')
 
         data_1 = _[_['Store'] == _['Store'].iloc[0]]
