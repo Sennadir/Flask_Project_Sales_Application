@@ -16,6 +16,9 @@ It will help us interact easily with our model and easily try it.
 * First start by installing the requirement :
 `pip install scikit-learn pandas numpy flask werkzeug pickle time`
 
+* Next, and in case it's the first time using the model, you will have to train it :
+`python model.py`
+
 * Then you should launch the app in a terminal.
 `python app.py`
 

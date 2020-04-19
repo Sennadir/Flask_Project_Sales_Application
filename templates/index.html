@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Sales Prediction Tool</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js" type="text/javascript"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <script src='{{ url_for('static', filename='chart/Chart.min.js') }}'></script>
+
+  <!-- Custom fonts for this template -->
+  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css"> -->
+
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet" type="text/css">
+
+  <!-- Charlist-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+  <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+  <!-- Bootstraps Java Scipts Links -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+  <!-- JQuery links  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="css/landing-page.min.css" rel="stylesheet"> -->
+
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/landing-page.min.css') }}">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-center">
+    <div class="container">
+      <a class="navbar-brand" href="/">Sales Prediction Tool</a>
+    </div>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Accueil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/pie">Predictions</a>
+      </li>
+    </ul>
+
+  </nav>
+
+
+
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Mieux prédire pour mieux gérer!</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Icons Grid -->
+  <section class="features-icons bg-light text-center">
+    <h2>Les bases de notre approche</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-screen-desktop m-auto text-primary"></i>
+            </div>
+            <h3>Feature Engineering</h3>
+            <p class="lead mb-0">Extraction des informations intéressante des différents DataSet.</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-layers m-auto text-primary"></i>
+            </div>
+            <h3>Modélisation</h3>
+            <p class="lead mb-0">Choix du modèle et adaptation des paramètres.</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-check m-auto text-primary"></i>
+            </div>
+            <h3>Validation du modèle</h3>
+            <p class="lead mb-0">Test du modèle sur un DataSet extérieur et validation des hypothèses.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="opacity: 0.5;background-image: url('{{ url_for('static', filename='img/img_analytics_2.jpg') }}');">
+      </div>
+
+
+
+
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <center>
+          <h3>Analyse des ventes précédentes</h3>
+        </center>
+
+          <div class="container">
+              <div class="row">
+                  <div class = 'col-12'>
+                      <div class="card">
+                          <div class="card-body">
+                              <canvas id="Chart_2" height="800px" width=" 1000px"></canvas>
+                          </div>
+                      </div>
+                  </div>
+               </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img" style="opacity: 0.5;background-image: url('{{ url_for('static', filename='img/bg-showcase-2.jpg') }}');"></div>
+        <div class="col-lg-6 my-auto showcase-text">
+            <center>
+            <h3>Analyse des types magasins</h3>
+          </center>
+          <div class = 'col-12'>
+              <div class="card">
+                  <div class="card-body">
+
+                    <canvas id="chart" width="600" height="400"></canvas>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+
+      <div class="col-lg-6 order-lg-2 text-white showcase-img" style="opacity: 0.5;background-image: url('{{ url_for('static', filename='img/img_analytics_3.jpg') }}');">
+      </div>
+      <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+        <center>
+        <h3>Analyse des assortissements</h3>
+      </center>
+
+        <div class="container">
+            <div class="row">
+                <div class = 'col-12'>
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="myChart" height="800px" width=" 1000px"></canvas>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+
+
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials text-center bg-light">
+    <div class="container">
+      <h2 class="mb-5">Notre équipe ..</h2>
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/manon.jpeg') }}" alt="">
+            <h5>Manon Rivoire</h5>
+
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/clotilde.jpg') }}" alt="">
+            <h5>Clotilde Miura</h5>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/rym.jpeg') }}" alt="">
+            <h5>Rym Gassi</h5>
+          </div>
+        </div>
+
+
+        <div class="col-lg-5">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/sofiane.jpeg') }}" alt="">
+            <h5>Sofiane ENNADIR</h5>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='img/alexis.jpeg') }}" alt="">
+            <h5>Alexis Gerbaux</h5>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="call-to-action text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h2 class="mb-4">Test et validation du modèle </h2>
+        </div>
+
+        <div class="col-xl-9 mx-auto">
+          <p class="mb-4">
+            Vous pouvez tester vos propres données. Vous devez pour se faire, choisir un fichier CSV contenant les données
+            et à travers notre Pre-processing, nous pourrons les utiliser dans notre modèle.
+           </p>
+        </div>
+
+
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <div class="col-lg-12">
+            <form  action="{{ url_for('predict')}}" method="post" enctype="multipart/form-data">
+               <input type = "file" name = "file" class="btn btn-primary" />
+               <input class="btn btn-light" type = "submit"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+              <a href="/">Accueil</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="/pie">Prédictions</a>
+            </li>
+
+
+          </ul>
+          <p class="text-muted small mb-4 mb-lg-0">&copy; 2020 - Tous droits réservés. </p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+
+
+<script>
+
+      // Global parameters:
+      // do not resize the chart canvas when its container does (keep at 600x400px)
+      Chart.defaults.global.responsive = true;
+
+      // define the chart data
+      var chartData = {
+      labels : [{% for item in lab_2 %}
+               "{{item}}",
+              {% endfor %}],
+      datasets : [{
+        label: '{{ legend_2 }}',
+        fill: true,
+        lineTension: 0.1,
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in val_2 %}
+                  {{item}},
+                {% endfor %}],
+        spanGaps: false
+      }]
+      }
+
+
+      // get chart canvas
+      var ctx = document.getElementById("myChart").getContext("2d");
+
+      // create the chart using the chart canvas
+      var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      });
+
+</script>
+
+
+
+<script>
+
+      // Global parameters:
+      // do not resize the chart canvas when its container does (keep at 600x400px)
+      Chart.defaults.global.responsive = true;
+
+      // define the chart data
+      var chartData = {
+      labels : [{% for item in lab_1 %}
+               "{{item}}",
+              {% endfor %}],
+      datasets : [{
+        label: '{{ legend }}',
+        fill: true,
+        lineTension: 0.1,
+        // backgroundColor: "rgba(75,192,192,0.4)",
+        // borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in val_1 %}
+                  {{item}},
+                {% endfor %}],
+        spanGaps: false
+      },
+
+      {
+        label: '{{ legend_1 }}',
+        fill: true,
+        lineTension: 0.1,
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBorderWidth: 2,
+
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data : [{% for item in values %}
+                  {{item}},
+                {% endfor %}],
+        spanGaps: false
+      }
+
+    ]
+      }
+
+
+      // get chart canvas
+      var ctx = document.getElementById("Chart_2").getContext("2d");
+
+      // create the chart using the chart canvas
+      var Chart_2 = new Chart(ctx, {
+      type: 'line',
+      data: chartData,
+      });
+
+
+
+
+      // Pie Chart Part
+
+
+
+
+</script>
+
+
+
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
+<script>
+Chart.defaults.global.responsive = true;
+
+  var pieData = [
+    {% for item, label, colors in set %}
+      {
+        value: {{item}},
+        label: "{{label}}",
+        color : "{{colors}}"
+      },
+    {% endfor %}
+  ];
+
+  var pieOptions = {
+    legend: {
+        display: true,
+        labels: {
+            fontColor: 'rgb(255, 99, 132)'
+        }
+    }
+  };
+
+  // get bar chart canvas
+  var mychart = document.getElementById("chart").getContext("2d");
+  steps = 10
+  max = {{ max }}
+
+
+
+  // draw pie chart
+  new Chart(document.getElementById("chart").getContext("2d")).Pie(pieData, pieOptions);
+
+</script>
+
+
+</body>
+
+
+
+
+
+</html>
