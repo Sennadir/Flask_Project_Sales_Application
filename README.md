@@ -28,7 +28,7 @@ And finally, through the terminal you will get a
 
 ## File Structure
 
-
+'''bash
 .
 ├── Model
 │   ├── Model_reg.py
@@ -187,3 +187,5 @@ And finally, through the terminal you will get a
     └── pred.html
 
 24 directories, 131 files
+
+'''
