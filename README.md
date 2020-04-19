@@ -54,5 +54,5 @@ The context of the project is purely educational. It's a project that have been 
 * Clotilde MIURA
 * Manon RIVOIRE
 * Rym GASSI
-* Alexis GERBAUX
+* Alexis GERBEAUX
 * Sofiane ENNADIR
