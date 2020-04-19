@@ -51,8 +51,8 @@ The folder containing the project should be structured as follows :
 The context of the project is purely educational. It's a project that have been conducted in the context of the Course Machine Learning Business Case deserved in the M2 Data Science of Ecole Polytechnique.
 
 ## Authors :
-* Clotilde Miura
-* Manon Rivoire
-* Rym Gassi
-* Alexis Gerbaux
+* Clotilde MIURA
+* Manon RIVOIRE
+* Rym GASSI
+* Alexis GERBAUX
 * Sofiane ENNADIR
