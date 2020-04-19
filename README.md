@@ -13,6 +13,8 @@ It will help us interact easily with our model and easily try it.
 
 # Usage
 
+## Application Launch
+
 * First start by installing the requirement :
 `pip install scikit-learn pandas numpy flask werkzeug pickle time`
 
@@ -22,7 +24,13 @@ It will help us interact easily with our model and easily try it.
 * Then you should launch the app in a terminal.
 `python app.py`
 
-* And finally, through the terminal you will get a link to your application.
+* And finally, through the terminal you will get a link to your application. By default it's : http://127.0.0.1:5000/.
+
+## Model Usage
+
+* In order to use the model, you will have to browse a Test Set which has exactly the same columns as the Training Set (Without the Lables of course :-)).
+
+* Because we can't display the totality of the prediction for the different stores, we have choosen to only display 2 Stores (The ones with the majority of samples) and the predicted values for all stores could be find in a generated CSV File that could be find in the Prediction Folder.
 
 
 # File Structure
@@ -34,3 +42,14 @@ The folder containing the project should be structured as follows :
 * [Prediction] (It's the folder containing the predictions that would be generated for the user)
 * [templates] (It's the folder containing the different HTML Files)
 * [data] (It's the folder containing the data)
+
+# About the project
+## Context
+The context of the project is purely educational. It's a project that have been conducted in the context of the Course Machine Learning Business Case deserved in the M2 Data Science of Ecole Polytechnique.
+
+## Authors :
+* Clotilde Miura
+* Manon Rivoire
+* Rym Gassi
+* Alexis Gerbaux
+* Sofiane ENNADIR
